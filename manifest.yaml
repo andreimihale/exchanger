@@ -1,0 +1,7 @@
+applications:
+  - name: exchanger
+memory: 256M
+path: build/
+buildpack: staticfile_buildpack
+routes:
+  - route: exchanger.eu-gb.cf.appdomain.cloud/
