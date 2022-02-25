@@ -1,0 +1,14 @@
+$primary: #313131;
+$secondary: #525b61;
+$black: #000000;
+$active: #834040;
+$background: linear-gradient(160.74deg, #92fe9d -5.21%, #00c9ff 104.9%)
+  no-repeat;
+
+@mixin flex-row-nowrap-sb-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}

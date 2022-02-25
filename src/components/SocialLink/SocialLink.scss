@@ -1,0 +1,9 @@
+.footer__link {
+  &:not(:last-child) {
+    margin-right: 1.875rem;
+  }
+  &__icon {
+    width: 48px;
+    height: 48px;
+  }
+}

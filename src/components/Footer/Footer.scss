@@ -1,0 +1,24 @@
+@import "../../variables.scss";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  margin: 30px 1rem 1rem 1rem;
+  text-align: center;
+  background-color: transparent;
+  overflow: hidden;
+
+  &__text {
+    color: $black;
+  }
+  &__links {
+    @include flex-row-nowrap-sb-center;
+    gap: 1.875rem;
+    margin-top: 1rem;
+  }
+}

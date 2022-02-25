@@ -1,0 +1,40 @@
+@import "../../variables.scss";
+
+.navigation {
+  @include flex-row-nowrap-sb-center;
+
+  max-width: 100%;
+  max-height: 3.125rem;
+
+  top: 0;
+  left: 0;
+  z-index: 100;
+  .logo {
+    width: 3.125rem;
+    height: 3.125rem;
+    background: linear-gradient(
+      126.75deg,
+      rgba(252, 252, 252, 0.36) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    border-radius: 100%;
+  }
+
+  .links {
+    @include flex-row-nowrap-sb-center;
+    height: 3.125rem;
+    font-size: 1.3rem;
+
+    &__link {
+      text-decoration: none;
+      color: $primary;
+
+      &_active {
+        color: $active;
+      }
+    }
+    &__link:first-child {
+      margin-right: 1rem;
+    }
+  }
+}
