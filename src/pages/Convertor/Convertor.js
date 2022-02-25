@@ -75,7 +75,7 @@ const Convertor = () => {
   }
 
   return (
-    <div className="convertor">
+    <section className="convertor">
       <div className="convertor-header">
         <h1 className="convertor-header__title">express convertor</h1>
         <h2 className="convertor-header__subtitle">
@@ -173,7 +173,7 @@ const Convertor = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+
+  &__content {
+    @include glass-container;
+    div:first-child {
+      max-width: 100%;
+    }
+  }
+}

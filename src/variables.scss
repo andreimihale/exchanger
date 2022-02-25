@@ -12,3 +12,25 @@ $background: linear-gradient(160.74deg, #92fe9d -5.21%, #00c9ff 104.9%)
   justify-content: space-between;
   align-items: center;
 }
+
+@mixin glass-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+  min-height: 15rem;
+  max-width: 80rem;
+  padding: 1.875rem 0.875rem;
+  background: radial-gradient(
+    105.02% 100% at 0% 0%,
+    rgba(255, 255, 255, 0.64) 0%,
+    rgba(255, 255, 255, 0.24) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+}

@@ -38,25 +38,7 @@
   }
 
   &-content {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 2rem;
-    min-height: 15rem;
-    max-width: 80rem;
-    padding: 1.875rem 0.875rem;
-    background: radial-gradient(
-      105.02% 100% at 0% 0%,
-      rgba(255, 255, 255, 0.64) 0%,
-      rgba(255, 255, 255, 0.24) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-sizing: border-box;
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
+    @include glass-container;
 
     &__from {
       display: flex;
