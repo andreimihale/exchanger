@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateMoment from "@mui/lab/AdapterMoment";
@@ -35,6 +36,7 @@ const Convertor = () => {
       userCurrency,
       date
     );
+
     setExchangeRate(apiExchangeRate);
   };
 
@@ -60,10 +62,15 @@ const Convertor = () => {
     toast.success("Copied to clipboard!");
   };
 
+  const changeDate = (newDate) => {
+    setDate(newDate);
+  };
+
   useEffect(() => {
+    console.log("RENDER");
     fetchData();
     setAmount("1.00");
-  }, []);
+  }, [date]);
 
   if (currency === baseCurrency) {
     setBaseCurrency("USD");
@@ -84,7 +91,7 @@ const Convertor = () => {
                 views={["year", "month", "day"]}
                 disableFuture
                 onChange={(newDate) => {
-                  setDate(newDate);
+                  changeDate(newDate);
                 }}
                 renderInput={(params) => (
                   // eslint-disable-next-line react/jsx-props-no-spreading
