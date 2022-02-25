@@ -57,7 +57,7 @@ const Convertor = () => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText((amount * exchangeRate).toFixed(2));
+    navigator.clipboard.writeText((amount * exchangeRate).toFixed(4));
     toast.success("Copied to clipboard!");
   };
 
@@ -159,7 +159,7 @@ const Convertor = () => {
             size="small"
             disabled
             id="result"
-            value={(amount * exchangeRate).toFixed(2)}
+            value={(amount * exchangeRate).toFixed(4)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">{currency}</InputAdornment>
