@@ -7,11 +7,13 @@ import Moment from "moment";
 import Autocomplete from "@mui/material/Autocomplete";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import toast from "react-hot-toast";
 import "./Convertor.scss";
 import getCountryCurrency from "../../actions/getCountryCode";
 import getAllCurrencies from "../../actions/getAllCurrencies";
 import Switcher from "../../static/Ellipse.svg";
 import getExchangeRate from "../../actions/getExchangeRate";
+import CopyIcon from "../../static/ContentCopy.svg";
 
 const Convertor = () => {
   const [date, setDate] = useState(Moment());
@@ -51,6 +53,11 @@ const Convertor = () => {
 
     setExchangeRate(apiExchangeRate);
     setBaseCurrency(value);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText((amount * exchangeRate).toFixed(2));
+    toast.success("Copied to clipboard!");
   };
 
   useEffect(() => {
@@ -146,6 +153,7 @@ const Convertor = () => {
             label="Amount"
             size="small"
             disabled
+            id="result"
             value={(amount * exchangeRate).toFixed(2)}
             InputProps={{
               startAdornment: (
@@ -153,6 +161,11 @@ const Convertor = () => {
               ),
             }}
           />
+          <div className="convertor-content__result__copy">
+            <IconButton onClick={copyToClipboard}>
+              <img src={CopyIcon} alt="copy button" />
+            </IconButton>
+          </div>
         </div>
       </div>
     </div>

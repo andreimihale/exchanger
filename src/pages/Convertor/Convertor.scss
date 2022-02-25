@@ -152,10 +152,17 @@
       }
 
       &__input {
-        width: 60% !important;
+        width: 45% !important;
         color: $secondary !important;
         input {
           -webkit-text-fill-color: rgba(0, 0, 0, 0.87) !important;
+        }
+      }
+
+      &__copy {
+        margin-left: 1rem;
+        span {
+          width: auto;
         }
       }
     }
