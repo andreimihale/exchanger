@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateMoment from "@mui/lab/AdapterMoment";
@@ -67,7 +66,6 @@ const Convertor = () => {
   };
 
   useEffect(() => {
-    console.log("RENDER");
     fetchData();
     setAmount("1.00");
   }, [date]);
