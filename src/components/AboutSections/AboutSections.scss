@@ -1,0 +1,17 @@
+@import "../../variables.scss";
+
+.about {
+  &__content {
+    & p {
+      & div:first-child {
+        margin-top: 1.875rem;
+      }
+      & div:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+      & ul {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

@@ -14,5 +14,14 @@
     div:first-child {
       max-width: 100%;
     }
+
+    & p {
+      & div:first-child {
+        margin-top: 1.875rem;
+      }
+      & div:not(:first-child):not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
   }
 }

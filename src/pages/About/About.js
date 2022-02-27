@@ -4,11 +4,14 @@ import { Box, Tabs, Tab, Typography } from "@mui/material";
 import { tabsClasses } from "@mui/material/Tabs";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./About.scss";
+import Project from "../../components/AboutSections/Project";
+import Technologies from "../../components/AboutSections/Technologies";
+import Apis from "../../components/AboutSections/Apis";
+import Deployment from "../../components/AboutSections/Deployment";
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#834040",
     },
   },
@@ -79,16 +82,16 @@ const About = () => {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            Item One
+            <Project />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            <Technologies />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <Apis />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item Four
+            <Deployment />
           </TabPanel>
         </div>
       </section>

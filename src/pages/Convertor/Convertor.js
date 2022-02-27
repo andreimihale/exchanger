@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateMoment from "@mui/lab/AdapterMoment";
@@ -35,6 +36,15 @@ const Convertor = () => {
       userCurrency,
       date
     );
+
+    if (
+      typeof apiExchangeRate === "string" &&
+      apiExchangeRate.toLowerCase().includes("error")
+    ) {
+      toast.error(
+        "Currency Error! Please pick another date or another currency!"
+      );
+    }
 
     setExchangeRate(apiExchangeRate);
   };
