@@ -18,21 +18,21 @@ import CopyIcon from "../../static/ContentCopy.svg";
 
 const Convertor = () => {
   const [date, setDate] = useState(Moment());
-  const [currency, setCurrency] = useState("");
-  const [baseCurrency, setBaseCurrency] = useState("EUR");
-  const [currencies, setCurrencies] = useState([]);
-  const [amount, setAmount] = useState("1.00");
-  const [exchangeRate, setExchangeRate] = useState(0);
+  const [currencyData, setCurrencyData] = useState({
+    currency: "",
+    baseCurrency: "EUR",
+    currencies: [],
+    amount: "1.00",
+    exchangeRate: 0,
+  });
 
   const fetchData = async () => {
     const userCurrency = await getCountryCurrency();
-    setCurrency(userCurrency);
 
     const allCurrencies = await getAllCurrencies();
-    setCurrencies(Object.keys(allCurrencies));
 
     const apiExchangeRate = await getExchangeRate(
-      baseCurrency,
+      currencyData.baseCurrency,
       userCurrency,
       date
     );
@@ -46,28 +46,46 @@ const Convertor = () => {
       );
     }
 
-    setExchangeRate(apiExchangeRate);
+    setCurrencyData({
+      ...currencyData,
+      currency: userCurrency,
+      currencies: Object.keys(allCurrencies),
+      exchangeRate: apiExchangeRate,
+    });
   };
 
   const switchCurrency = async () => {
-    const apiExchangeRate = await getExchangeRate(currency, baseCurrency, date);
-    setExchangeRate(apiExchangeRate);
+    const apiExchangeRate = await getExchangeRate(
+      currencyData.currency,
+      currencyData.baseCurrency,
+      date
+    );
 
-    const userCurrency = currency;
-    setBaseCurrency(null);
-    setCurrency(baseCurrency);
-    setBaseCurrency(userCurrency);
+    setCurrencyData({
+      ...currencyData,
+      exchangeRate: apiExchangeRate,
+      currency: currencyData.baseCurrency,
+      baseCurrency: currencyData.currency,
+    });
   };
 
   const changeBaseCurrency = async (event, value) => {
-    const apiExchangeRate = await getExchangeRate(value, currency, date);
-
-    setExchangeRate(apiExchangeRate);
-    setBaseCurrency(value);
+    const apiExchangeRate = await getExchangeRate(
+      value,
+      currencyData.currency,
+      date
+    );
+    setCurrencyData({
+      ...currencyData,
+      exchangeRate: apiExchangeRate,
+      baseCurrency: value,
+    });
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText((amount * exchangeRate).toFixed(4));
+    navigator.clipboard.writeText(
+      (currencyData.amount * currencyData.exchangeRate).toFixed(4)
+    );
     toast.success("Copied to clipboard!");
   };
 
@@ -77,11 +95,13 @@ const Convertor = () => {
 
   useEffect(() => {
     fetchData();
-    setAmount("1.00");
   }, [date]);
 
-  if (currency === baseCurrency) {
-    setBaseCurrency("USD");
+  if (currencyData.currency === currencyData.baseCurrency) {
+    setCurrencyData({
+      ...currencyData,
+      baseCurrency: "USD",
+    });
   }
 
   return (
@@ -115,8 +135,8 @@ const Convertor = () => {
           <span>from</span>
           <div className="convertor-content__from__autocomplete">
             <Autocomplete
-              options={currencies}
-              value={baseCurrency}
+              options={currencyData.currencies}
+              value={currencyData.baseCurrency}
               onChange={(event, value) => {
                 changeBaseCurrency(event, value);
               }}
@@ -135,11 +155,14 @@ const Convertor = () => {
           <span>to</span>
           <Autocomplete
             className="convertor-content__to__autocomplete"
-            options={currencies}
-            value={currency}
+            options={currencyData.currencies}
+            value={currencyData.currency}
             fullWidth
             onChange={(event, newValue) => {
-              setCurrency(newValue);
+              setCurrencyData({
+                ...currencyData,
+                currency: newValue,
+              });
             }}
             renderInput={(params) => (
               <TextField {...params} label="Currency" size="small" />
@@ -150,13 +173,20 @@ const Convertor = () => {
           <span>amount</span>
           <TextField
             className="convertor-content__amount__input"
-            onChange={(event) => setAmount(event.target.value)}
+            onChange={(event) =>
+              setCurrencyData({
+                ...currencyData,
+                amount: event.target.value,
+              })
+            }
             label="Amount"
             size="small"
-            value={amount}
+            value={currencyData.amount}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start">{baseCurrency}</InputAdornment>
+                <InputAdornment position="start">
+                  {currencyData.baseCurrency}
+                </InputAdornment>
               ),
             }}
           />
@@ -169,10 +199,12 @@ const Convertor = () => {
             size="small"
             disabled
             id="result"
-            value={(amount * exchangeRate).toFixed(4)}
+            value={(currencyData.amount * currencyData.exchangeRate).toFixed(4)}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start">{currency}</InputAdornment>
+                <InputAdornment position="start">
+                  {currencyData.currency}
+                </InputAdornment>
               ),
             }}
           />
